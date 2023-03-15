@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    //don't limit yourself to our template ***
-
-
 
     public static void main(String[] args) {
         runMenu();
@@ -24,7 +21,7 @@ public class Main {
 
         ArrayList<User> userArrayList = new ArrayList<>();
 
-        User user1 = new User();
+        User user1 = new User("user1", "pass0000");
         user1.setUsername("user1");
         user1.setPassword("pass0000");
         listOfUser.add(user1);
@@ -60,46 +57,83 @@ public class Main {
         tvshow3.setCast("Brett Goldstein");
         listOfTVshows.add(tvshow3);
 
+        user1.addToFavorites(tvshow1);
+        user1.addToFavorites(tvshow2);
         user1.addToFavorites(tvshow3);
+
 
         System.out.println("▶NETFLIX◀");
         System.out.println("Do you have an account?\n1.Yes\t2.No");
         int mainCommand = scanner.nextInt();
         switch (mainCommand) {
-            case 1 :
+            case 1:
                 System.out.println("Enter your username and password to login");
-                System.out.println(listOfUsersName);
-                user1.viewFavorites();
-                System.out.println(user1.favoriteShows);
                 String username = scanner.nextLine();
                 String password = scanner.nextLine();
                 if (listOfUsersName.contains("user1")) {
-                    if (netService.login(username,password)) {
+                    if (netService.login(username, password)) {
                         System.out.println("Welcome " + username);
-                        System.out.println("what do you want to do?\n1.search a ");
+                        System.out.println("what do you want to do?\n1.search a TV show\t2.view your favorite TV shows");
+                        int userCommand = scanner.nextInt();
+                        switch (userCommand) {
+                            case 1:
+                                System.out.println("Do you want to search with :\n1.title\t2.genre\t3.release year");
+                                int searchCommand = scanner.nextInt();
+                                switch (searchCommand) {
+                                    case 1:
+                                        System.out.println("Enter the title");
+                                        String title = scanner.nextLine();
+                                        user1.searchByTitle(title);
+                                        break;
+                                    case 2:
+                                        System.out.println("Enter the genre");
+                                        String genre = scanner.nextLine();
+                                        user1.searchByGenre(genre);
+
+                                        break;
+                                    case 3:
+                                        System.out.println("Enter the release year");
+                                        int year = scanner.nextInt();
+
+                                        break;
+                                    default:
+                                        System.out.println("choose 1 to 3");
+                                }
+                                break;
+                            case 2:
+                                user1.viewFavorites();
+
+                                break;
+                            default:
+                                System.out.println("choose 1 or 2");
+                        }
+                    } else {
+                        System.out.println("try again");
+                        runMenu();
                     }
                 }
                 else {
-                    System.out.println("user not found!");
-                    runMenu();
+                    System.out.println("username not found!");
                 }
+
                 break;
             case 2 :
                 System.out.println("Enter a username");
                 String newUsername = scanner.nextLine();
-                for (int i = 0; i < listOfUser.size(); i++) {
-                    if (newUsername.equals(listOfUser.get(i).getUsername())) {
+                for (int i = 0; i < listOfUsersName.size(); i++) {
+                    if (newUsername.equals(listOfUsersName.get(i).toString())){
                         System.out.println("username tooken\ntry again");
                     }
                     else {
                         System.out.println("Enter a password");
                         String newPassword = scanner.nextLine();
-                        User newUser = new User();
+                        User newUser = new User(newUsername, newPassword);
                         newUser.setUsername(newUsername);
                         newUser.setPassword(newPassword);
                         listOfUser.add(newUser);
+                        listOfUsersName.add(newUsername);
                         System.out.println("Account created successfully");
-                        System.out.println("What do you want to do?\n1.search a movie");
+                        System.out.println("What do you want to do?\n1.search a movie\t2.log out");
                         int userCommand = scanner.nextInt();
                         switch (userCommand) {
                             case 1 :
@@ -129,13 +163,7 @@ public class Main {
                                 }
                                 break;
                             case 2 :
-
-
-                                break;
-                            case 3 :
-
-
-
+                                netService.logout();
                                 break;
                             default:
                                 System.out.println("choose 1 to 3");

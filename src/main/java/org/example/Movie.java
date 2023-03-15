@@ -12,9 +12,6 @@ class Movie extends TVShow {
         return length;
     }
 
-    /*
-     *Movie is extended from TVShow and has extra attribute length.
-     */
     public Movie()
     {
         super();

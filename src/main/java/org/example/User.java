@@ -15,6 +15,11 @@ class User {
     private String username;
     private String password;
 
+    public User(String username,String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public void setUsername(String newUsername) {
         username = newUsername;
     }
@@ -38,9 +43,13 @@ class User {
     public ArrayList<TVShow> searchByTitle(String title) {
         // Implement search by title in favorite shows  logic here
         int j = 1;
+        System.out.println("first");
         for (int i = 0; i < favoriteShows.size(); i++) {
+            System.out.println("secend");
             if (title.equals(favoriteShows.get(i).getTitle())) {
+                System.out.println("third");
                if (j == 1) {
+                   System.out.println("fourth");
                    System.out.println("These shows were found with name : " + title + " in your favorite TVshows :");
                }
                 System.out.println(j + ")");
@@ -59,7 +68,7 @@ class User {
         return null;
     }
     public ArrayList<TVShow> searchByGenre(String genre) {
-        // Implement search by genre in favorite shows  logic here
+
         int j = 1;
         for (int i = 0; i < favoriteShows.size(); i++) {
             if (genre.equals(favoriteShows.get(i).getGenre())) {
@@ -108,11 +117,11 @@ class User {
         favoriteShows.add(show);
     }
     public void viewFavorites() {
-
-        System.out.println(favoriteShows);
+        for (int i = 0; i < favoriteShows.size(); i++) {
+            System.out.println(favoriteShows.get(i).toString());
+        }
     }
     public ArrayList<TVShow> getRecommendations() {
-        // Implement get recommendations logic here
         return null;
     }
 }

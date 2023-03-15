@@ -30,7 +30,6 @@ class NetflixService {
         usersArray.add(newUser);
     }
     public void addTVShow(TVShow tvShow){
-        // Implement add tv show logic here
         TVshowsArray.add(tvShow);
     }
 
@@ -41,7 +40,7 @@ class NetflixService {
 
     public void createAccount(String username, String password) {
         // Implement create account logic here
-        User newUser = new User();
+        User newUser = new User(username, password);
         newUser.setUsername(username);
         newUser.setPassword(password);
         usersArray.add(newUser);
@@ -49,7 +48,6 @@ class NetflixService {
     }
 
     public boolean login(String username, String password) {
-        // Implement login logic here
         boolean correct = false;
             for (int i = 0; i < usersArray.size(); i++) {
                 if (password.equals(usersArray.get(i).getUsername())) {
@@ -66,7 +64,8 @@ class NetflixService {
     }
 
     public void logout() {
-        // Implement logout logic here
+        System.out.println("goodBye");
+        System.exit(0);
     }
 
     public ArrayList<TVShow> searchByTitle(String title) {
@@ -116,7 +115,7 @@ class NetflixService {
     }
 
     public ArrayList<TVShow> searchByReleaseYear(int year) {
-        // Implement search by release year logic here
+
         return null;
     }
 

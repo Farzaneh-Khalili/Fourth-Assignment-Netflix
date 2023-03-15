@@ -3,15 +3,13 @@ package org.example;
 import java.util.ArrayList;
 
 class TVShow {
-    /*
-    *The TVShow should have a title , genre, release year, duration and a rating.
-     *The TVShow should have an ArrayList of the cast.
-     */
+
     private String title;
     private String genre;
     private int releaseYear;
     private int duration;
     private double rating;
+
 
     public void setTitle(String newTitle) {
         title = newTitle;
@@ -51,6 +49,12 @@ class TVShow {
 
     public double getRating() {
         return rating;
+    }
+
+    public String toString()
+    {
+        return "name:" + title + "\ngenre:" + genre + "\trating:" + rating + "\tduration:"
+                + duration + "\treleas year:" + releaseYear;
     }
     private ArrayList<String> cast = new ArrayList<>();
     public void setCast(String nameOfCast) {
