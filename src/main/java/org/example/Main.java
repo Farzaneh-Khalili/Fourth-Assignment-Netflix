@@ -2,6 +2,8 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
 
@@ -127,48 +129,56 @@ public class Main {
                     else {
                         System.out.println("Enter a password");
                         String newPassword = scanner.nextLine();
-                        User newUser = new User(newUsername, newPassword);
-                        newUser.setUsername(newUsername);
-                        newUser.setPassword(newPassword);
-                        listOfUser.add(newUser);
-                        listOfUsersName.add(newUsername);
-                        System.out.println("Account created successfully");
-                        System.out.println("What do you want to do?\n1.search a movie\t2.log out");
-                        int userCommand = scanner.nextInt();
-                        switch (userCommand) {
-                            case 1 :
-                                System.out.println("search with \n1.title\t2.genre\t3.release year");
-                                int searchCommand = scanner.nextInt();
-                                switch (searchCommand) {
-                                    case 1 :
-                                        System.out.println("Enter the title");
-                                        String title = scanner.nextLine();
-                                        netService.searchByTitle(title);
+                        Pattern patternPassword = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
+                        Matcher matcherPassword = patternPassword.matcher(newPassword);
+                        if (matcherPassword.find()) {
+                            User newUser = new User(newUsername, newPassword);
+                            newUser.setUsername(newUsername);
+                            newUser.setPassword(newPassword);
+                            listOfUser.add(newUser);
+                            listOfUsersName.add(newUsername);
+                            System.out.println("Account created successfully");
+                            System.out.println("What do you want to do?\n1.search a movie\t2.log out");
+                            int userCommand = scanner.nextInt();
+                            switch (userCommand) {
+                                case 1:
+                                    System.out.println("search with \n1.title\t2.genre\t3.release year");
+                                    int searchCommand = scanner.nextInt();
+                                    switch (searchCommand) {
+                                        case 1:
+                                            System.out.println("Enter the title");
+                                            String title = scanner.nextLine();
+                                            netService.searchByTitle(title);
 
-                                        break;
-                                    case 2 :
-                                        System.out.println("Enter the genre");
-                                        String genre = scanner.nextLine();
-                                        netService.searchByGenre(genre);
+                                            break;
+                                        case 2:
+                                            System.out.println("Enter the genre");
+                                            String genre = scanner.nextLine();
+                                            netService.searchByGenre(genre);
 
-                                        break;
-                                    case 3 :
-                                        System.out.println("Enter the release year");
-                                        int releaseYear = scanner.nextInt();
-                                        netService.searchByReleaseYear(releaseYear);
+                                            break;
+                                        case 3:
+                                            System.out.println("Enter the release year");
+                                            int releaseYear = scanner.nextInt();
+                                            netService.searchByReleaseYear(releaseYear);
 
-                                        break;
-                                    default:
-                                        System.out.println("choose 1 to 3");
-                                }
-                                break;
-                            case 2 :
-                                netService.logout();
-                                break;
-                            default:
-                                System.out.println("choose 1 to 3");
+                                            break;
+                                        default:
+                                            System.out.println("choose 1 to 3");
+                                    }
+                                    break;
+                                case 2:
+                                    netService.logout();
+                                    break;
+                                default:
+                                    System.out.println("choose 1 to 3");
+                            }
+                        }
+                        else {
+                            System.out.println("Please choose a password which is at least 8 letters and contains both numbers and character");
                         }
                     }
+
                 }
                 break;
             default:

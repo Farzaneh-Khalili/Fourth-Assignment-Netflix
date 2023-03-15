@@ -34,12 +34,11 @@ class NetflixService {
     }
 
     public void addMovie(Movie movie){
-        // Implement add movie logic here
+
         moviesArray.add(movie);
     }
 
     public void createAccount(String username, String password) {
-        // Implement create account logic here
         User newUser = new User(username, password);
         newUser.setUsername(username);
         newUser.setPassword(password);
@@ -69,7 +68,6 @@ class NetflixService {
     }
 
     public ArrayList<TVShow> searchByTitle(String title) {
-        // Implement search by title logic here
         int j = 1;
         for (int i = 0; i < TVshowsArray.size(); i++) {
             if (title.equals(TVshowsArray.get(i).getTitle())) {
@@ -92,7 +90,6 @@ class NetflixService {
     }
 
     public ArrayList<TVShow> searchByGenre(String genre) {
-        // Implement search by genre logic here
         int j = 1;
         for (int i = 0; i < TVshowsArray.size(); i++) {
             if (genre.equals(TVshowsArray.get(i).getGenre())) {
@@ -116,6 +113,24 @@ class NetflixService {
 
     public ArrayList<TVShow> searchByReleaseYear(int year) {
 
+        int j = 1;
+        for (int i = 0; i < TVshowsArray.size(); i++) {
+            if (year == TVshowsArray.get(i).getReleaseYear()) {
+                if (j == 1) {
+                    System.out.println("These shows were found with genre : " + year + " in your favorite TVshows :");
+                }
+                System.out.println(j + ")");
+                System.out.println(TVshowsArray.get(i).getTitle() + " ⇒\n");
+                System.out.println("genre ► " + TVshowsArray.get(i).getGenre());
+                System.out.println("\nrelease year ► " + TVshowsArray.get(i).getReleaseYear());
+                System.out.println("\nduration ► " + TVshowsArray.get(i).getDuration());
+                System.out.println("\nrating ► " + TVshowsArray.get(i).getRating());
+                j = j + 1;
+            }
+            else {
+                System.out.println("It seems we don't have any shows that match this release year (" + year + ")");
+            }
+        }
         return null;
     }
 

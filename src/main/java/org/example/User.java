@@ -41,15 +41,10 @@ class User {
         return favoriteShows;
     }
     public ArrayList<TVShow> searchByTitle(String title) {
-        // Implement search by title in favorite shows  logic here
         int j = 1;
-        System.out.println("first");
         for (int i = 0; i < favoriteShows.size(); i++) {
-            System.out.println("secend");
             if (title.equals(favoriteShows.get(i).getTitle())) {
-                System.out.println("third");
                if (j == 1) {
-                   System.out.println("fourth");
                    System.out.println("These shows were found with name : " + title + " in your favorite TVshows :");
                }
                 System.out.println(j + ")");
@@ -89,11 +84,10 @@ class User {
         }
         return null;
     }
-    /*public ArrayList<TVShow> searchByReleaseYear(int year) {
-        // Implement search by release year in favorite shows logic here
+    public ArrayList<TVShow> searchByReleaseYear(int year) {
         int j = 1;
         for (int i = 0; i < favoriteShows.size(); i++) {
-            if (year.equals(favoriteShows.get(i).getGenre())) {
+            if (year == favoriteShows.get(i).getReleaseYear()) {
                 if (j == 1) {
                     System.out.println("These shows were found with genre : " + year + " in your favorite TVshows :");
                 }
@@ -110,7 +104,7 @@ class User {
             }
         }
         return null;
-    }*/
+    }
 
     public void addToFavorites(TVShow show) {
 
