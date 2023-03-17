@@ -1,5 +1,6 @@
 package org.example;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 
 class NetflixService {
@@ -26,6 +27,7 @@ class NetflixService {
         return namesOfUser;
     }
 
+
     public void addToUserArray(User newUser) {
         usersArray.add(newUser);
     }
@@ -47,91 +49,95 @@ class NetflixService {
     }
 
     public boolean login(String username, String password) {
-        boolean correct = false;
-            for (int i = 0; i < usersArray.size(); i++) {
-                if (password.equals(usersArray.get(i).getUsername())) {
-                    correct = true;
-                } else {
-                    System.out.println("password incorrect");
-                }
+        for (User user : usersArray) {
+            if (user.getPassword().equals(password) && user.getUsername().equals(username)) {
+                return true;
             }
-        if (correct) {
+        }
+        return false;
+    }
+
+    public void logout() {
+        System.out.println("GoodBye(●'◡'●)");
+        System.exit(0);
+    }
+
+    public boolean searchByTitle(String title) {
+        int j = 1;
+        boolean exist = false;
+        for (int i = 0; i < TVshowsArray.size(); i++) {
+            if (title.equals(TVshowsArray.get(i).getTitle())) {
+                exist = true;
+                if (j == 1) {
+                    System.out.println("This is what we found with title ↪" + title + "↩");
+                }
+                System.out.println(j + ")");
+                System.out.println(TVshowsArray.get(i).getTitle() + " ⇒");
+                System.out.println("genre ► " + TVshowsArray.get(i).getGenre());
+                System.out.println("release year ► " + TVshowsArray.get(i).getReleaseYear());
+                System.out.println("duration ► " + TVshowsArray.get(i).getDuration());
+                System.out.println("rating ► " + TVshowsArray.get(i).getRating() + "\n");
+                System.out.println("\n");
+                j = j + 1;
+            }
+        }
+        if (exist) {
             return true;
         }
         else
             return false;
     }
 
-    public void logout() {
-        System.out.println("goodBye");
-        System.exit(0);
-    }
-
-    public ArrayList<TVShow> searchByTitle(String title) {
+    public boolean searchByGenre(String genre) {
         int j = 1;
-        for (int i = 0; i < TVshowsArray.size(); i++) {
-            if (title.equals(TVshowsArray.get(i).getTitle())) {
-                if (j == 1) {
-                    System.out.println("These shows were found with name : " + title + " in your favorite TVshows :");
-                }
-                System.out.println(j + ")");
-                System.out.println(TVshowsArray.get(i).getTitle() + " ⇒\n");
-                System.out.println("genre ► " + TVshowsArray.get(i).getGenre());
-                System.out.println("\nrelease year ► " + TVshowsArray.get(i).getReleaseYear());
-                System.out.println("\nduration ► " + TVshowsArray.get(i).getDuration());
-                System.out.println("\nrating ► " + TVshowsArray.get(i).getRating());
-                j = j + 1;
-            }
-            else {
-                System.out.println("It seems we don't have any shows that match this title (" + title + ")");
-            }
-        }
-        return null;
-    }
-
-    public ArrayList<TVShow> searchByGenre(String genre) {
-        int j = 1;
+        boolean exist = false;
         for (int i = 0; i < TVshowsArray.size(); i++) {
             if (genre.equals(TVshowsArray.get(i).getGenre())) {
+                exist = true;
                 if (j == 1) {
-                    System.out.println("These shows were found with genre : " + genre + " in your favorite TVshows :");
+                    System.out.println("This is what we found with genre ↪" + genre + "↩");
                 }
                 System.out.println(j + ")");
-                System.out.println(TVshowsArray.get(i).getTitle() + " ⇒\n");
+                System.out.println(TVshowsArray.get(i).getTitle() + " ⇒");
                 System.out.println("genre ► " + TVshowsArray.get(i).getGenre());
-                System.out.println("\nrelease year ► " + TVshowsArray.get(i).getReleaseYear());
-                System.out.println("\nduration ► " + TVshowsArray.get(i).getDuration());
-                System.out.println("\nrating ► " + TVshowsArray.get(i).getRating());
+                System.out.println("release year ► " + TVshowsArray.get(i).getReleaseYear());
+                System.out.println("duration ► " + TVshowsArray.get(i).getDuration());
+                System.out.println("rating ► " + TVshowsArray.get(i).getRating() + "\n");
+                System.out.println("\n");
                 j = j + 1;
             }
-            else {
-                System.out.println("It seems we don't have any shows that match this genre (" + genre + ")");
-            }
         }
-        return null;
+        if (exist) {
+            return true;
+        }
+        else
+            return false;
     }
 
-    public ArrayList<TVShow> searchByReleaseYear(int year) {
-
+    public boolean searchByReleaseYear(int year) {
         int j = 1;
+        boolean exist = false;
         for (int i = 0; i < TVshowsArray.size(); i++) {
             if (year == TVshowsArray.get(i).getReleaseYear()) {
+                exist = true;
                 if (j == 1) {
-                    System.out.println("These shows were found with genre : " + year + " in your favorite TVshows :");
+                    System.out.println("This is what we found with release year ↪" + year + "↩");
                 }
                 System.out.println(j + ")");
-                System.out.println(TVshowsArray.get(i).getTitle() + " ⇒\n");
+                System.out.println(TVshowsArray.get(i).getTitle() + " ⇒");
                 System.out.println("genre ► " + TVshowsArray.get(i).getGenre());
-                System.out.println("\nrelease year ► " + TVshowsArray.get(i).getReleaseYear());
-                System.out.println("\nduration ► " + TVshowsArray.get(i).getDuration());
-                System.out.println("\nrating ► " + TVshowsArray.get(i).getRating());
+                System.out.println("release year ► " + TVshowsArray.get(i).getReleaseYear());
+                System.out.println("duration ► " + TVshowsArray.get(i).getDuration());
+                System.out.println("rating ► " + TVshowsArray.get(i).getRating() + "\n");
+                System.out.println("\n");
                 j = j + 1;
             }
-            else {
-                System.out.println("It seems we don't have any shows that match this release year (" + year + ")");
-            }
         }
-        return null;
+        if (exist) {
+            return true;
+        }
+        else
+            return false;
     }
 
 

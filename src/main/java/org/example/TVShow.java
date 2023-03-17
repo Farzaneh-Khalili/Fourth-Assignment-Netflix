@@ -2,13 +2,14 @@ package org.example;
 
 import java.util.ArrayList;
 
-class TVShow {
+public class TVShow {
 
     private String title;
     private String genre;
     private int releaseYear;
     private int duration;
     private double rating;
+    private boolean isLiked;
 
 
     public void setTitle(String newTitle) {
@@ -49,6 +50,12 @@ class TVShow {
 
     public double getRating() {
         return rating;
+    }
+    public void setIsLiked(boolean action) {
+        isLiked = action;
+    }
+    public boolean getIsLiked() {
+        return isLiked;
     }
 
     public String toString()
