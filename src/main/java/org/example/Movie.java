@@ -3,9 +3,15 @@ package org.example;
 import java.util.ArrayList;
 
 class Movie extends TVShow {
-    /*
-     *Movie is extended from TVShow and has extra attribute length.
-     */
+
+    private int length;
+    public void setLength(int newLength) {
+        length = newLength;
+    }
+    public int getLength() {
+        return length;
+    }
+
     public Movie()
     {
         super();
